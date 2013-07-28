@@ -2,8 +2,12 @@
   "author": "AJ ONeal <coolaj86@gmail.com> (http://coolaj86.info)",
   "name": "df",
   "description": "wraps and parses `df` - OS X and Linux variants",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/coolaj86/node-df-js.git"
+  },
   "bin": {
     "df-json": "./index.js"
   },
