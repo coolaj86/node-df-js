@@ -19,7 +19,7 @@
   df(function (err, devices) {
     devices.forEach(function (dev) {
       assert.ok(dev.filesystem.match(/^[^\s]+\s?[^\s]+$/), "doesn't look like a filesystem");
-      assert.ok(dev.blocks >= 0, 'blocks < 0 || NaN');
+      assert.ok(dev.storage >= 0, 'storage < 0 || NaN');
       assert.ok(dev.used >= 0, 'used < 0 || NaN');
       assert.ok(dev.available >= 0, 'available < 0 || NaN');
       //assert.strictEqual(dev.blocks, dev.used + dev.available, 'blacks != used + avaiable');

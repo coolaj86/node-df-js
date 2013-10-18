@@ -5,7 +5,7 @@
   // map auto_home          0         0         0   100%    /home
   var exec = require('child_process').exec
     , os = require('os')
-    , reCaptureCells = /^([^\s]+\s?[^\s]+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)%\s+[^/]*(.*?)\s*$/
+    , reCaptureCells = /^([^\s]+\s?[^\s]+)\s+([a-zA-Z0-9]+)\s+([a-zA-Z0-9]+)\s+([a-zA-Z0-9]+)\s+(\d+)%\s+[^/]*(.*?)\s*$/
     , cmdMap = {
           "Darwin": "df -b"
         , "Linux": "df -B 512"
@@ -18,32 +18,41 @@
     , reDf = reMap[os.type()]
     ;
 
-  function init() {
+  function sizeToByte(string, size) {
+    var conversion = 1;
+    if(size === 'TB' || string.indexOf('T') !== -1) {
+      conversion = 1099511627776;
+    } else if(size === 'GB' || string.indexOf('G') !== -1) {
+      conversion = 1073741824;
+    } else if(size === 'MB' || string.indexOf('M') !== -1) {
+      conversion = 1048576;
+    } else if(size === 'KB' || string.indexOf('K') !== -1) {
+      conversion = 1024;
+    }
+
+    return parseInt(string) * conversion;
     // TODO test default block size
   }
 
   function df(cb) {
     function formatDf(err, stdout, stderr) {
-      var table
-        , infos = []
-        ;
+      var table,
+          infos = [];
 
       function parseRow(row) {
-        var cells = row.match(reDf)
-          ;
+        var cells = row.match(reDf);
 
-        if (!cells) {
+        if (!cells || row.indexOf('Filesystem') !== -1) {
           return;
         }
-
         // FYI
         // It seems that RegExp Match isn't a true array
         // popping it deos weird things
         infos.push({
             filesystem: cells[1]
-          , blocks: parseInt(cells[2], 10)
-          , used: parseInt(cells[3], 10)
-          , available: parseInt(cells[4], 10)
+          , storage: sizeToByte(cells[2])
+          , used: sizeToByte(cells[3])
+          , available: sizeToByte(cells[4])
           , percent: parseInt(cells[5], 10)
           , mountpoint: cells[6]
         });
@@ -68,7 +77,7 @@
       cb(null, infos);
     }
 
-    exec('df', formatDf);
+    exec('df -kh', formatDf);
   }
 
   function main () {
