@@ -8,7 +8,7 @@
     , reCaptureCells = /^([^\s]+\s?[^\s]+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)%\s+[^/]*(.*?)\s*$/
     , cmdMap = {
           "Darwin": "df -b"
-        , "Linux": "df -B 512"
+        , "Linux": "df -PB 512"
       }
     , reMap = {
           "Darwin": reCaptureCells
@@ -68,7 +68,7 @@
       cb(null, infos);
     }
 
-    exec('df', formatDf);
+    exec(cmdDf, formatDf);
   }
 
   function main () {
