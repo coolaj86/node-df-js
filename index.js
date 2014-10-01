@@ -5,10 +5,10 @@
   // map auto_home          0         0         0   100%    /home
   var exec = require('child_process').exec
     , os = require('os')
-    , reCaptureCells = /^([^\s]+\s?[^\s]+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)%\s+[^/]*(.*?)\s*$/
+    , reCaptureCells = /^([^\s]+\s?[^\s]+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)%\s+[^/]*(.*?)\s+(.*?)\s*$/
     , cmdMap = {
           "Darwin": "df -b"
-        , "Linux": "df -B 512"
+        , "Linux": "df -B 512 --output=source,size,used,avail,pcent,target,fstype"
       }
     , reMap = {
           "Darwin": reCaptureCells
@@ -46,6 +46,7 @@
           , available: parseInt(cells[4], 10)
           , percent: parseInt(cells[5], 10)
           , mountpoint: cells[6]
+          , type: cells[7]
         });
       }
 
@@ -68,7 +69,7 @@
       cb(null, infos);
     }
 
-    exec('df', formatDf);
+    exec(cmdDf, formatDf);
   }
 
   function main () {
