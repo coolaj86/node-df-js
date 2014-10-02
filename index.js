@@ -12,8 +12,8 @@
         , "Linux": "df -B 512 --output=source,size,used,avail,pcent,target,fstype"
       }
     , reMap = {
-          "Darwin": reCaptureCells
-        , "Linux": reCaptureCells
+          "Darwin": reCaptureCellsDarwin
+        , "Linux": reCaptureCellsLinux
       }
     , cmdDf = cmdMap[os.type()]
     , reDf = reMap[os.type()]
