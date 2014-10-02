@@ -5,7 +5,7 @@
   // map auto_home          0         0         0   100%    /home
   var exec = require('child_process').exec
     , os = require('os')
-    , reCaptureCellsDarwin = /^([^\s]+\s?[^\s]+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)%\s+[^/]*(.*?)\s*$/;
+    , reCaptureCellsDarwin = /^([^\s]+\s?[^\s]+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)%\s+[^/]*(.*?)\s*$/
     , reCaptureCellsLinux = /^([^\s]+\s?[^\s]+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)%\s+[^/]*(.*?)\s+(.*?)\s*$/
     , cmdMap = {
           "Darwin": "df -b"
