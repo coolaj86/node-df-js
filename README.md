@@ -10,44 +10,53 @@ Installation
 
 To install both module and commandline versions:
 
-    npm install df
-    npm install -g df
+```bash
+npm install df
+npm install -g df
+```
 
 Usage
 ===
 
 Command-line:
 
-    df-json
+```bash
+df-json
+```
 
 Module:
 
-    (function () {
-      "use strict";
+```javascript
+(function () {
+  "use strict";
 
-      var df = require('df')
-        ;
+  var df = require('df')
+    ;
 
-      df(function (err, table) {
-        if (err) {
-          console.error(err.stack);
-          return;
-        }
+  df(function (err, table) {
+    if (err) {
+      console.error(err.stack);
+      return;
+    }
 
-        console.log(JSON.stringify(table, null, '  '));
-      });
-    }());
+    console.log(JSON.stringify(table, null, '  '));
+  });
+}());
+```
 
 Output:
 ===
 
-    [
-      {
-        "filesystem": "/dev/disk0s2",
-        "blocks": 488555536,
-        "used": 472631632,
-        "available": 15411904,
-        "percent": 97,
-        "mountpoint": "/"
-      }
-    ]
+```json
+[
+  {
+    "filesystem": "/dev/disk0s2",
+    "blocks": 488555536,
+    "used": 472631632,
+    "available": 15411904,
+    "percent": 97,
+    "mountpoint": "/",
+    "type": "ext4"            // Linux only
+  }
+]
+```
