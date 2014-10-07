@@ -2,7 +2,7 @@
   "author": "AJ ONeal <coolaj86@gmail.com> (http://coolaj86.info)",
   "name": "df",
   "description": "wraps and parses `df` - OS X and Linux variants",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "main": "index.js",
   "repository": {
     "type": "git",
