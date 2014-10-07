@@ -12,7 +12,8 @@
     "used": 472631632,
     "available": 15411904,
     "percent": 97,
-    "mountpoint": "/"
+    "mountpoint": "/",
+    "type": "ext2" // linux only
   }
   */
 
